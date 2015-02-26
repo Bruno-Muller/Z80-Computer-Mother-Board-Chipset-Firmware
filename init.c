@@ -29,9 +29,13 @@ void init() {
     Z80_INT = 1;
     TRISC0 = 0; // Z80_INT
 
+    SDCARD_SELECT_PORT = 1;
+    TRISC1 = 0; // SDCARD_SELECT_PORT
+
     // Internal configuration
     usart_init();
     spi_init();
+    soft_spi_init();
 
     // External configuration
     ioexp_init();

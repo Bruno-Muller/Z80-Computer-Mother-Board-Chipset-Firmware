@@ -7,7 +7,7 @@
 
 #include "front_panel.h"
 
-void front_panel() {
+void front_panel_handler() {
     static unsigned int address = 0;
     static unsigned char mode = FP_RUN;
 
@@ -32,7 +32,7 @@ void front_panel() {
     switch (status) {
         case FP_RUN:           
             mode = FP_RUN;
-            memory_quick_operation_postlude();
+            memory_operation_postlude();
             computer_memory_idle();
             z80_bus_release();
             ioexp_interrupt_write(IOEXP8_GPINTEN, IOEXP_INTERRUPT_MASK);
@@ -47,7 +47,7 @@ void front_panel() {
             break;
         case FP_EXAMINE:
             memory_unselect();
-            memory_quick_read_prelude();
+            memory_read_prelude();
             address = high<<8 | low;
             ioexp_address_write(IOEXP16_GPIOA, address);
             ioexp_address_write(IOEXP16_GPIOB, address>>8);
@@ -56,14 +56,14 @@ void front_panel() {
         case FP_EXAMINE_NEXT:
             address++;
             memory_unselect();
-            memory_quick_read_prelude();
+            memory_read_prelude();
             ioexp_address_write(IOEXP16_GPIOA, address);
             ioexp_address_write(IOEXP16_GPIOB, address>>8);
             memory_select();
             break;
         case FP_DEPOSIT:
             memory_unselect();
-            memory_quick_write_prelude();
+            memory_write_prelude();
             ioexp_address_write(IOEXP16_GPIOA, address);
             ioexp_address_write(IOEXP16_GPIOB, address>>8);
             ioexp_data_write(IOEXP8_GPIO, low);
@@ -72,7 +72,7 @@ void front_panel() {
         case FP_DEPOSIT_NEXT:
             address++;
             memory_unselect();
-            memory_quick_write_prelude();
+            memory_write_prelude();
             ioexp_address_write(IOEXP16_GPIOA, address);
             ioexp_address_write(IOEXP16_GPIOB, address>>8);
             ioexp_data_write(IOEXP8_GPIO, low);
@@ -80,7 +80,7 @@ void front_panel() {
             break;
         case FP_CLEAR:
             memory_unselect();
-            memory_quick_write_prelude();
+            memory_write_prelude();
             ioexp_address_write(IOEXP16_GPIOA, address);
             ioexp_address_write(IOEXP16_GPIOB, address>>8);
             ioexp_data_write(IOEXP8_GPIO, 0);
@@ -93,10 +93,9 @@ void front_panel() {
             break;
         case FP_HALT:
             break;
-        default:
-            usart_write_string("\r\nFP BAD STATUS: ");
-            usart_write_hex(status);
-
+        //default:
+            //usart_write_string("\r\nFRONT PANEL BAD STATUS: ");
+            //usart_write_hex(status);
     }
 
 }

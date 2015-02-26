@@ -9,7 +9,7 @@ void ioexp_init() {
     ioexp_address_write(IOEXP16_IODIRB, IOEXP_INPUTS);
 
     ioexp_interrupt_write(IOEXP8_IOCON, IOEXP_CONF);
-    ioexp_interrupt_write(IOEXP8_IODIR, IOEXP_INTERRUPT_MASK);
+    ioexp_interrupt_write(IOEXP8_IODIR, IOEXP_INTERRUPT_IODIR);
     ioexp_interrupt_write(IOEXP8_INTCON, IOEXP_INTERRUPT_INTCON);
 }
 

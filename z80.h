@@ -10,7 +10,14 @@
 
 #include <xc.h>
 
+#include "clock.h"
 #include "conf.h"
+#include "eeprom.h"
+#include "ioexp.h"
+#include "sdcard.h"
+#include "timer.h"
+#include "usart.h"
+#include "vga.h"
 
 #define z80_bus_request()   Z80_BUSREQ = 0; while(Z80_BUSACK == 1)
 #define z80_bus_request_from_wait_state()   Z80_BUSREQ = 0;  z80_resume(); while(Z80_BUSACK == 1)
@@ -25,9 +32,10 @@
 #define z80_int_assert()    Z80_INT = 0
 #define z80_int_disassert() Z80_INT = 1
 
-volatile unsigned char z80_interrupt_vector, z80_char_buffer;
+volatile unsigned char z80_interrupt_vector;
 
-void z80_resume(); // continue
+void z80_interrupt_acknowledge();
+void z80_resume();
 
 #endif	/* Z80_H */
 

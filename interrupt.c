@@ -11,7 +11,7 @@ void interrupt interrupt_handler() {
         z80_int_assert(); // throw interrupt to z80
     } else if (RCIE && RCIF) {
         RCIF = 0;
-        z80_char_buffer = RCREG;
+        computer_char_buffer = RCREG;
         z80_interrupt_vector = INTERRUPT_VECTOR_USART;
         z80_int_assert(); // throw interrupt to z80
     } else if (INTE && INTF) {

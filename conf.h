@@ -10,13 +10,15 @@
 
 #include <xc.h>
 
+#define NULL (void*) 0
+
 #define _XTAL_FREQ 16000000
 
 // Decoder
 #define DECODER_SELECT_A    RA0 // output
 #define DECODER_SELECT_B    RA1 // output
 #define DECODER_SELECT_C    RA2 // output
-#define DECODER_SELECT      RA7 // output
+#define DECODER_SELECT      RA7 // output (actuve low)
 
 // Memory
 #define MEMORY_SELECT_PORT  RA3 // (idle)input/(active)output
@@ -35,6 +37,14 @@
 
 #define INTERRUPT_CONTROLLER        RB0 // (interrupt)input
 
+// SOFT_SPI
+#define SOFT_SPI_SCK      RC2 // output
+#define SOFT_SPI_MISO     RB6 // input
+#define SOFT_SPI_MOSI     RB7 // output
+
+// SDCARD
+#define SDCARD_SELECT_PORT   RC1 // output (active low)
+
 // input/output configuration register
 #define DEFAULT_PORTA   0b10111000
 #define DEFAULT_ANSELA  0x00
@@ -45,9 +55,6 @@
 #define DEFAULT_PORTB   0b00111000
 #define DEFAULT_ANSELB  0x00
 #define DEFAULT_TRISB   0b11000111
-
-unsigned char buffer[64];
-#define BUFFER_SIZE 64
 
 /******************************
  * #pragma config Settings    *

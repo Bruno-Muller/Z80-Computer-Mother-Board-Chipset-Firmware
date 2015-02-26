@@ -13,6 +13,7 @@
 #include "conf.h"
 #include "ioexp.h"
 #include "sdcard.h"
+#include "soft_spi.h"
 #include "spi.h"
 #include "usart.h"
 

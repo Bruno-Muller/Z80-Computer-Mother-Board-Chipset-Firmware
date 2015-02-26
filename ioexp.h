@@ -52,7 +52,8 @@
 #define IOEXP_OUTPUTS 0x00
 #define IOEXP_INPUTS  0xFF
 #define IOEXP_CONF    0x20 // SEQOP disable; HAEN disable; ODR disable; INTPOL Active-low
-#define IOEXP_INTERRUPT_MASK    0x03
+#define IOEXP_INTERRUPT_IODIR   0b10011111
+#define IOEXP_INTERRUPT_MASK    0b00011011
 #define IOEXP_INTERRUPT_INTCON  0x00
 
 #define IOEXP_WRITE   0x40

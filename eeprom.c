@@ -8,7 +8,7 @@ void eeprom_read(unsigned int address, unsigned char *buffer) {
     spi_write(address);
 
     unsigned char i;
-    for (i=0; i<BUFFER_SIZE; i++) {
+    for (i=0; i<EEPROM_PAGE_SIZE; i++) {
         buffer[i] = spi_read();
     }
   

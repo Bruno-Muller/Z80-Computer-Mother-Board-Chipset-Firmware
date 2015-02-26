@@ -10,13 +10,14 @@
 
 #include <xc.h>
 
+#include "conf.h"
 #include "decoder.h"
 #include "memory.h"
-#include "spi.h"
+#include "soft_spi.h"
 #include "usart.h"
 
-#define sdcard_select()      decoder_select(DECODER_SELECT_SDCARD)
-#define sdcard_unselect()    decoder_unselect()
+#define sdcard_select()      SDCARD_SELECT_PORT = 0
+#define sdcard_unselect()    SDCARD_SELECT_PORT = 1
 
 // Commandes
 #define GO_IDLE_STATE           0

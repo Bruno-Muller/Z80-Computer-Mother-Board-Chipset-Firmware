@@ -28,7 +28,7 @@
 #define FP_RESET        0x50
 #define FP_HALT         0x30
 
-void front_panel();
+void front_panel_handler();
 
 #endif	/* FRONT_PANEL_H */
 
