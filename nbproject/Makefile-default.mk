@@ -45,11 +45,11 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/usart.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/sdcard.p1 ${OBJECTDIR}/eeprom.p1 ${OBJECTDIR}/ioexp.p1 ${OBJECTDIR}/decoder.p1 ${OBJECTDIR}/memory.p1 ${OBJECTDIR}/z80.p1 ${OBJECTDIR}/computer.p1 ${OBJECTDIR}/bus.p1 ${OBJECTDIR}/event.p1 ${OBJECTDIR}/state_machine.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/front_panel.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/init.p1.d ${OBJECTDIR}/usart.p1.d ${OBJECTDIR}/spi.p1.d ${OBJECTDIR}/sdcard.p1.d ${OBJECTDIR}/eeprom.p1.d ${OBJECTDIR}/ioexp.p1.d ${OBJECTDIR}/decoder.p1.d ${OBJECTDIR}/memory.p1.d ${OBJECTDIR}/z80.p1.d ${OBJECTDIR}/computer.p1.d ${OBJECTDIR}/bus.p1.d ${OBJECTDIR}/event.p1.d ${OBJECTDIR}/state_machine.p1.d ${OBJECTDIR}/interrupt.p1.d ${OBJECTDIR}/front_panel.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/usart.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/sdcard.p1 ${OBJECTDIR}/eeprom.p1 ${OBJECTDIR}/ioexp.p1 ${OBJECTDIR}/decoder.p1 ${OBJECTDIR}/memory.p1 ${OBJECTDIR}/z80.p1 ${OBJECTDIR}/computer.p1 ${OBJECTDIR}/bus.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/front_panel.p1 ${OBJECTDIR}/soft_spi.p1 ${OBJECTDIR}/vga.p1 ${OBJECTDIR}/keyboard.p1 ${OBJECTDIR}/clock.p1 ${OBJECTDIR}/timer.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/init.p1.d ${OBJECTDIR}/usart.p1.d ${OBJECTDIR}/spi.p1.d ${OBJECTDIR}/sdcard.p1.d ${OBJECTDIR}/eeprom.p1.d ${OBJECTDIR}/ioexp.p1.d ${OBJECTDIR}/decoder.p1.d ${OBJECTDIR}/memory.p1.d ${OBJECTDIR}/z80.p1.d ${OBJECTDIR}/computer.p1.d ${OBJECTDIR}/bus.p1.d ${OBJECTDIR}/interrupt.p1.d ${OBJECTDIR}/front_panel.p1.d ${OBJECTDIR}/soft_spi.p1.d ${OBJECTDIR}/vga.p1.d ${OBJECTDIR}/keyboard.p1.d ${OBJECTDIR}/clock.p1.d ${OBJECTDIR}/timer.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/usart.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/sdcard.p1 ${OBJECTDIR}/eeprom.p1 ${OBJECTDIR}/ioexp.p1 ${OBJECTDIR}/decoder.p1 ${OBJECTDIR}/memory.p1 ${OBJECTDIR}/z80.p1 ${OBJECTDIR}/computer.p1 ${OBJECTDIR}/bus.p1 ${OBJECTDIR}/event.p1 ${OBJECTDIR}/state_machine.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/front_panel.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/usart.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/sdcard.p1 ${OBJECTDIR}/eeprom.p1 ${OBJECTDIR}/ioexp.p1 ${OBJECTDIR}/decoder.p1 ${OBJECTDIR}/memory.p1 ${OBJECTDIR}/z80.p1 ${OBJECTDIR}/computer.p1 ${OBJECTDIR}/bus.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/front_panel.p1 ${OBJECTDIR}/soft_spi.p1 ${OBJECTDIR}/vga.p1 ${OBJECTDIR}/keyboard.p1 ${OBJECTDIR}/clock.p1 ${OBJECTDIR}/timer.p1
 
 
 CFLAGS=
@@ -156,20 +156,6 @@ ${OBJECTDIR}/bus.p1: bus.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/bus.d ${OBJECTDIR}/bus.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/bus.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/event.p1: event.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/event.p1.d 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/event.p1  event.c 
-	@-${MV} ${OBJECTDIR}/event.d ${OBJECTDIR}/event.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/event.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/state_machine.p1: state_machine.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/state_machine.p1.d 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/state_machine.p1  state_machine.c 
-	@-${MV} ${OBJECTDIR}/state_machine.d ${OBJECTDIR}/state_machine.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/state_machine.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 ${OBJECTDIR}/interrupt.p1: interrupt.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/interrupt.p1.d 
@@ -183,6 +169,41 @@ ${OBJECTDIR}/front_panel.p1: front_panel.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/front_panel.p1  front_panel.c 
 	@-${MV} ${OBJECTDIR}/front_panel.d ${OBJECTDIR}/front_panel.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/front_panel.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/soft_spi.p1: soft_spi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/soft_spi.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/soft_spi.p1  soft_spi.c 
+	@-${MV} ${OBJECTDIR}/soft_spi.d ${OBJECTDIR}/soft_spi.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/soft_spi.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/vga.p1: vga.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/vga.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/vga.p1  vga.c 
+	@-${MV} ${OBJECTDIR}/vga.d ${OBJECTDIR}/vga.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/vga.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/keyboard.p1: keyboard.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/keyboard.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/keyboard.p1  keyboard.c 
+	@-${MV} ${OBJECTDIR}/keyboard.d ${OBJECTDIR}/keyboard.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/keyboard.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/clock.p1: clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/clock.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/clock.p1  clock.c 
+	@-${MV} ${OBJECTDIR}/clock.d ${OBJECTDIR}/clock.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/clock.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/timer.p1: timer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/timer.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/timer.p1  timer.c 
+	@-${MV} ${OBJECTDIR}/timer.d ${OBJECTDIR}/timer.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/timer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
@@ -269,20 +290,6 @@ ${OBJECTDIR}/bus.p1: bus.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/bus.d ${OBJECTDIR}/bus.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/bus.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/event.p1: event.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/event.p1.d 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/event.p1  event.c 
-	@-${MV} ${OBJECTDIR}/event.d ${OBJECTDIR}/event.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/event.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/state_machine.p1: state_machine.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/state_machine.p1.d 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/state_machine.p1  state_machine.c 
-	@-${MV} ${OBJECTDIR}/state_machine.d ${OBJECTDIR}/state_machine.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/state_machine.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 ${OBJECTDIR}/interrupt.p1: interrupt.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/interrupt.p1.d 
@@ -296,6 +303,41 @@ ${OBJECTDIR}/front_panel.p1: front_panel.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/front_panel.p1  front_panel.c 
 	@-${MV} ${OBJECTDIR}/front_panel.d ${OBJECTDIR}/front_panel.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/front_panel.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/soft_spi.p1: soft_spi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/soft_spi.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/soft_spi.p1  soft_spi.c 
+	@-${MV} ${OBJECTDIR}/soft_spi.d ${OBJECTDIR}/soft_spi.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/soft_spi.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/vga.p1: vga.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/vga.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/vga.p1  vga.c 
+	@-${MV} ${OBJECTDIR}/vga.d ${OBJECTDIR}/vga.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/vga.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/keyboard.p1: keyboard.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/keyboard.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/keyboard.p1  keyboard.c 
+	@-${MV} ${OBJECTDIR}/keyboard.d ${OBJECTDIR}/keyboard.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/keyboard.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/clock.p1: clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/clock.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/clock.p1  clock.c 
+	@-${MV} ${OBJECTDIR}/clock.d ${OBJECTDIR}/clock.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/clock.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/timer.p1: timer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/timer.p1.d 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G --asmlist  --double=24 --float=24 --opt=default,+asm,-asmfile,+speed,-space,-debug --addrqual=ignore --mode=free -P -N255 --warn=0 --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%%f:%%l: error: %%s" "--warnformat=%%f:%%l: warning: %%s" "--msgformat=%%f:%%l: advisory: %%s"  -o${OBJECTDIR}/timer.p1  timer.c 
+	@-${MV} ${OBJECTDIR}/timer.d ${OBJECTDIR}/timer.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/timer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
