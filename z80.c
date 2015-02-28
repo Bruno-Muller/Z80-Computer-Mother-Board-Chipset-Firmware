@@ -1,5 +1,7 @@
 #include "z80.h"
 
+volatile unsigned char z80_interrupt_vector;
+
 void z80_resume() {
     Z80_RESUME = 0;
     __delay_us(1);

@@ -24,6 +24,7 @@
       <itemPath>clock.h</itemPath>
       <itemPath>timer.h</itemPath>
       <itemPath>bool.h</itemPath>
+      <itemPath>null.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"

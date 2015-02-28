@@ -32,7 +32,7 @@
 #define z80_int_assert()    Z80_INT = 0
 #define z80_int_disassert() Z80_INT = 1
 
-volatile unsigned char z80_interrupt_vector;
+extern volatile unsigned char z80_interrupt_vector;
 
 void z80_interrupt_acknowledge();
 void z80_resume();

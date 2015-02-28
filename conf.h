@@ -10,8 +10,6 @@
 
 #include <xc.h>
 
-#define NULL (void*) 0
-
 #define _XTAL_FREQ 16000000
 
 // Decoder

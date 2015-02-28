@@ -1,5 +1,42 @@
 #include "computer.h"
 
+void (*read_function_pointer[])() = {
+    &computer_usart_read,    // PORT_USART      0x00
+    &computer_error,         // PORT_TIMER      0x01
+    &computer_error,         // PORT_SDCARD     0x02
+    &computer_error,         // PORT_EEPROM     0x03
+    &computer_error,         // PORT_RESTART    0x04
+    &computer_keyboard_read, // PORT_KEYBOARD   0x05
+    &computer_error,         // PORT_VGA        0x06
+    &computer_error          // PORT_CLOCK      0x07
+};
+
+void (*write_function_pointer[])() = {
+    &computer_usart_write,      // PORT_USART      0x00
+    &computer_timer_handler,    // PORT_TIMER      0x01
+    &computer_sdcard_handler,   // PORT_SDCARD     0x02
+    &computer_flash_bios,       // PORT_EEPROM     0x03
+    &computer_restart,          // PORT_RESTART    0x04
+    &computer_error,            // PORT_KEYBOARD   0x05
+    &computer_vga_write,        // PORT_VGA        0x06
+    &computer_clock_handler     // PORT_CLOCK      0x07
+};
+
+void (*state_function_pointer[])() = {
+        &computer_error,            // Z80_M1_READ_AND_WRITE 0x00
+        &computer_error,            // Z80_READ_AND_WRITE    0x01
+        &computer_error,            // Z80_M1_READ           0x02
+        &computer_read_handler,     // Z80_READ              0x03
+        &computer_error,            // Z80_M1_WRITE          0x04
+        &computer_write_handler,    // Z80_WRITE             0x05
+        &z80_interrupt_acknowledge, // Z80_INT_ACK           0x06
+        &computer_error             // Z80_READ_OR_WRITE     0x07
+};
+
+ComputerParameters computer_parameters;
+volatile unsigned char computer_char_buffer;
+unsigned char buffer[32];
+
 void computer_handler() {
     if (computer_parameters.state<STATE_TABLE_SIZE)
         (*state_function_pointer[computer_parameters.state])();

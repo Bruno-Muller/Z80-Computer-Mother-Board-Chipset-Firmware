@@ -19,6 +19,7 @@
 #include "interrupt.h"
 #include "ioexp.h"
 #include "keyboard.h"
+#include "null.h"
 #include "sdcard.h"
 #include "spi.h"
 #include "usart.h"
@@ -106,7 +107,7 @@ void main(void)
         if ((int_ctrl_intcap & INTERRUPT_FRONT_PANEL) == 0) {
             front_panel_handler();
         }
-        if ((int_ctrl_intcap & INTERRUPT_KEYBOARD) == 0) {
+       if (((int_ctrl_intf & INTERRUPT_KEYBOARD) != 0) && ((int_ctrl_intcap & INTERRUPT_KEYBOARD) == 0)) {
             computer_char_buffer = keyboard_read();
             if (computer_char_buffer != 0x00) {
                 z80_interrupt_vector = INTERRUPT_VECTOR_USART;
@@ -114,15 +115,15 @@ void main(void)
             }
         }
         if (((int_ctrl_intf & INTERRUPT_1HZ) != 0) && ((int_ctrl_intcap & INTERRUPT_1HZ) == 0)) {
-            clock_handler();
+            z80_interrupt_vector = INTERRUPT_VECTOR_CLOCK;
+            throw_interrupt = TRUE;
         }
-
         
         interrupt_acknowledge();
         z80_resume();
         ei();
 
-        if (((int_ctrl_intcap & INTERRUPT_KEYBOARD) != 0) && (throw_interrupt != FALSE)) {
+        if ((throw_interrupt != FALSE)) {
             throw_interrupt = FALSE;
             z80_int_assert();
         }

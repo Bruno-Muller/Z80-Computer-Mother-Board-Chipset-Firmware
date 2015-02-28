@@ -1,5 +1,7 @@
 #include "interrupt.h"
 
+volatile unsigned char interrupt_occured = INTERRUPT_NONE;
+
 void interrupt interrupt_handler() {
     if (TMR1IE && TMR1IF) {
         TMR1ON = 0;

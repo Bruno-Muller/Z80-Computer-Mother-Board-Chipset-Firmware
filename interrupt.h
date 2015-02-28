@@ -26,7 +26,7 @@
 #define INTERRUPT_KEYBOARD      0x08
 #define INTERRUPT_1HZ           0x10
 
-volatile unsigned char interrupt_occured = INTERRUPT_NONE;
+extern volatile unsigned char interrupt_occured;
 
 #define interrupt_wait()    while (interrupt_occured != INTERRUPT_OCCURED)
 #define interrupt_acknowledge()     interrupt_occured = INTERRUPT_NONE
