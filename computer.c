@@ -1,5 +1,12 @@
 #include "computer.h"
 
+void (*clock_function_pointer[])() = {
+    &computer_clock_get_datetime,   // COMPUTER_CLOCK_GET_DATETIME 0x00
+    &computer_clock_set_datetime,   // COMPUTER_CLOCK_SET_DATETIME 0x01
+    &computer_clock_int_enable,     // COMPUTER_CLOCK_INT_ENABLE   0x02
+    &computer_clock_int_disable     // COMPUTER_CLOCK_INT_DISABLE  0x03
+};
+
 void (*read_function_pointer[])() = {
     &computer_usart_read,    // PORT_USART      0x00
     &computer_error,         // PORT_TIMER      0x01
@@ -69,8 +76,22 @@ void computer_sdcard_handler() {
 }
 
 void computer_clock_handler() {
-    if (computer_parameters.data == COMPUTER_CLOCK_GET_DATETIME) computer_clock_get_datetime();
-    else computer_clock_set_datetime();
+    if (computer_parameters.data<CLOCK_TABLE_SIZE)
+        (*clock_function_pointer[computer_parameters.data])();
+    else
+        computer_error();
+}
+
+void computer_clock_int_enable() {
+    unsigned temp = ioexp_interrupt_read(IOEXP8_GPINTEN);
+    temp |= INTERRUPT_1HZ;
+    ioexp_interrupt_write(IOEXP8_GPINTEN, temp);
+}
+
+void computer_clock_int_disable() {
+    unsigned temp = ioexp_interrupt_read(IOEXP8_GPINTEN);
+    temp &= ~INTERRUPT_1HZ;
+    ioexp_interrupt_write(IOEXP8_GPINTEN, temp);
 }
 
 void computer_error() {
@@ -111,8 +132,6 @@ void computer_restart() {
     usart_write_string("\r\nPress restart button");
     while (1);
 }
-
-
 
 void computer_sdcard_init() {
     unsigned char ret = sdcard_init();

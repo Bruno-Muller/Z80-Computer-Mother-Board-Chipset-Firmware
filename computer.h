@@ -11,15 +11,18 @@
 #include <xc.h>
 
 #include "conf.h"
+#include "interrupt.h"
 #include "memory.h"
 #include "z80.h"
 
 #define COMPUTER_TIMER_ENABLE       0x00
-#define COMPUTER_TIMER_DISABLE      ~COMPUTER_TIMER_ENABLE
+#define COMPUTER_TIMER_DISABLE      0x01
 #define COMPUTER_SDCARD_READ        0x00
-#define COMPUTER_SDCARD_INIT        ~COMPUTER_SDCARD_READ
+#define COMPUTER_SDCARD_INIT        0x01
 #define COMPUTER_CLOCK_GET_DATETIME 0x00
-#define COMPUTER_CLOCK_SET_DATETIME ~COMPUTER_CLOCK_GET_DATETIME
+#define COMPUTER_CLOCK_SET_DATETIME 0x01
+#define COMPUTER_CLOCK_INT_ENABLE   0x02
+#define COMPUTER_CLOCK_INT_DISABLE  0x03
 
 #define PARAM_ADDRESS_INT       0x50
 #define PARAM_ADDRESS_LONG      0x52
@@ -51,6 +54,8 @@ void computer_sdcard_handler();
 void computer_timer_handler();
 void computer_write_handler();
 
+void computer_clock_int_enable();
+void computer_clock_int_disable();
 void computer_clock_set_datetime();
 void computer_clock_get_datetime();
 void computer_error();
@@ -74,6 +79,9 @@ extern void (*write_function_pointer[])();
 
 #define STATE_TABLE_SIZE    0x08
 extern void (*state_function_pointer[])();
+
+#define CLOCK_TABLE_SIZE    0x04
+extern void (*clock_function_pointer[])();
 
 extern ComputerParameters computer_parameters;
 extern volatile unsigned char computer_char_buffer;
