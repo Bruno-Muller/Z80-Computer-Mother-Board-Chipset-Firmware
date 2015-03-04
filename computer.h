@@ -34,6 +34,8 @@ typedef struct {
     unsigned char state;
     unsigned char port;
     unsigned char data;
+    unsigned char intf;
+    unsigned char intcap;
     void (*handler)();
 } ComputerParameters;
 

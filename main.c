@@ -93,10 +93,10 @@ void main(void)
         interrupt_wait();
         di();
 
-        unsigned char int_ctrl_intf = ioexp_interrupt_read(IOEXP8_INTF);
-        unsigned char int_ctrl_intcap = ioexp_interrupt_read(IOEXP8_INTCAP);
+        computer_parameters.intf = ioexp_interrupt_read(IOEXP8_INTF);
+        computer_parameters.intcap = ioexp_interrupt_read(IOEXP8_INTCAP);
 
-        if ((int_ctrl_intcap & INTERRUPT_Z80) == 0) {
+        if ((computer_parameters.intcap & INTERRUPT_Z80) == 0) {
             computer_parameters.state = ((PORTA & 0b00110000) >> 3) | ((PORTB & 0b00000010) >> 1);
             computer_parameters.port = bus_address_low_read();
             computer_parameters.data = bus_data_read();
@@ -104,17 +104,17 @@ void main(void)
             computer_handler();
             if (computer_parameters.handler != NULL) (*computer_parameters.handler)();
         }
-        if ((int_ctrl_intcap & INTERRUPT_FRONT_PANEL) == 0) {
+        if ((computer_parameters.intcap & INTERRUPT_FRONT_PANEL) == 0) {
             front_panel_handler();
         }
-       if (((int_ctrl_intf & INTERRUPT_KEYBOARD) != 0) && ((int_ctrl_intcap & INTERRUPT_KEYBOARD) == 0)) {
+       if (((computer_parameters.intf & INTERRUPT_KEYBOARD) != 0) && ((computer_parameters.intcap & INTERRUPT_KEYBOARD) == 0)) {
             computer_char_buffer = keyboard_read();
             if (computer_char_buffer != 0x00) {
                 z80_interrupt_vector = INTERRUPT_VECTOR_USART;
                 throw_interrupt = TRUE;
             }
         }
-        if (((int_ctrl_intf & INTERRUPT_1HZ) != 0) && ((int_ctrl_intcap & INTERRUPT_1HZ) == 0)) {
+        if (((computer_parameters.intf & INTERRUPT_1HZ) != 0) && ((computer_parameters.intcap & INTERRUPT_1HZ) == 0)) {
             z80_interrupt_vector = INTERRUPT_VECTOR_CLOCK;
             throw_interrupt = TRUE;
         }

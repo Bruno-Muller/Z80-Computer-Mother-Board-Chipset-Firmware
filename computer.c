@@ -95,7 +95,11 @@ void computer_clock_int_disable() {
 }
 
 void computer_error() {
-    usart_write_string("\r\nBlack Screen of Death ! state:");
+    usart_write_string("\r\nBlack Screen of Death !\r\nintf:");
+    usart_write_hex(computer_parameters.intf);
+    usart_write_string(" intcap:");
+    usart_write_hex(computer_parameters.intcap);
+    usart_write_string(" state:");
     usart_write_hex(computer_parameters.state);
     usart_write_string(" port:");
     usart_write_hex(computer_parameters.port);
