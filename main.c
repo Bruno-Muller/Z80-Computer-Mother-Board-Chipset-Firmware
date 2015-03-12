@@ -94,9 +94,9 @@ void main(void)
         di();
 
         computer_parameters.intf = ioexp_interrupt_read(IOEXP8_INTF);
-        computer_parameters.intcap = ioexp_interrupt_read(IOEXP8_INTCAP);
+        computer_parameters.intcap = ioexp_interrupt_read(IOEXP8_GPIO);
 
-        if ((computer_parameters.intcap & INTERRUPT_Z80) == 0) {
+        if (((computer_parameters.intf & INTERRUPT_Z80) != 0) && ((computer_parameters.intcap & INTERRUPT_Z80) == 0)) {
             computer_parameters.state = ((PORTA & 0b00110000) >> 3) | ((PORTB & 0b00000010) >> 1);
             computer_parameters.port = bus_address_low_read();
             computer_parameters.data = bus_data_read();
@@ -104,7 +104,7 @@ void main(void)
             computer_handler();
             if (computer_parameters.handler != NULL) (*computer_parameters.handler)();
         }
-        if ((computer_parameters.intcap & INTERRUPT_FRONT_PANEL) == 0) {
+        if (((computer_parameters.intf & INTERRUPT_FRONT_PANEL) != 0) && ((computer_parameters.intcap & INTERRUPT_FRONT_PANEL) == 0)) {
             front_panel_handler();
         }
        if (((computer_parameters.intf & INTERRUPT_KEYBOARD) != 0) && ((computer_parameters.intcap & INTERRUPT_KEYBOARD) == 0)) {

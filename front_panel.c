@@ -10,6 +10,7 @@
 void front_panel_handler() {
     static unsigned int address = 0;
     static unsigned char mode = FP_RUN;
+    static unsigned char intmask;
 
     unsigned char status, low, high;
 
@@ -30,19 +31,20 @@ void front_panel_handler() {
     decoder_unselect();
 
     switch (status) {
-        case FP_RUN:           
+        case FP_RUN:
+            ioexp_interrupt_write(IOEXP8_GPINTEN, intmask);
             mode = FP_RUN;
             memory_operation_postlude();
             computer_memory_idle();
             z80_bus_release();
-            ioexp_interrupt_write(IOEXP8_GPINTEN, IOEXP_INTERRUPT_MASK);
             break;
         case FP_PROGRAM:
             if (mode == FP_RUN) {
-                ioexp_interrupt_write(IOEXP8_GPINTEN, 0x02);
+                intmask = ioexp_interrupt_read(IOEXP8_GPINTEN);
+                ioexp_interrupt_write(IOEXP8_GPINTEN, INTERRUPT_FRONT_PANEL);
+                mode = FP_PROGRAM;
                 z80_bus_request_from_wait_state();
                 computer_memory_active();
-                mode = FP_PROGRAM;
             }
             break;
         case FP_EXAMINE:
