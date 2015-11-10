@@ -1,7 +1,5 @@
 #include "interrupt.h"
 
-volatile unsigned char interrupt_occured = INTERRUPT_NONE;
-
 void interrupt interrupt_handler() {
     if (TMR1IE && TMR1IF) {
         TMR1ON = 0;
@@ -9,15 +7,12 @@ void interrupt interrupt_handler() {
         TMR1H = ((15535 + 80) & 0xFF00) >> 8;
         TMR1L = ((15535 + 80) & 0x00FF);
         TMR1ON = 1;
-        z80_interrupt_vector = INTERRUPT_VECTOR_TIMER;
-        z80_int_assert(); // throw interrupt to z80
+        interrupt_flags.TMR = 1;
     } else if (RCIE && RCIF) {
         RCIF = 0;
         computer_char_buffer = RCREG;
-        z80_interrupt_vector = INTERRUPT_VECTOR_USART;
-        z80_int_assert(); // throw interrupt to z80
-    } else if (INTE && INTF) {
+        interrupt_flags.USART = 1;
+    }/* else if (INTE && INTF) {
         INTF = 0;
-        interrupt_occured = INTERRUPT_OCCURED;
-    }
+    }*/
 }

@@ -9,7 +9,7 @@ unsigned char sdcard_init() {
         soft_spi_write(0xFF);
     }
 
-    //usart_write_string("GO_IDLE_STATE: ");
+    //usart_write_string("\r\nGO_IDLE_STATE: ");
     sdcard_select();
     sdcard_send_command(GO_IDLE_STATE, 0, 0x95);
     response = soft_spi_write(0xFF);
@@ -67,7 +67,7 @@ void sdcard_read(unsigned int memory_address, unsigned long block_address) {
     do {
         response = soft_spi_write(0xFF);
     } while (response != 254);
-
+    //usart_write_string("\r\nDATA BEGIN: ");
     memory_write_prelude();
 
     for (i =0; i<512; i++) {
@@ -77,7 +77,7 @@ void sdcard_read(unsigned int memory_address, unsigned long block_address) {
     }
 
     memory_write_postlude();
-
+    //usart_write_string("\r\nDATA END ");
     do {
         response = soft_spi_write(0xFF);
     } while (response != 255);

@@ -30,12 +30,35 @@
 #define PARAM_ADDRESS_CLOCK     0x57
 #define PARAM_SIZE_CLOCK        7
 
+typedef union {
+    struct {
+        unsigned Z80    :1;
+        unsigned FP     :1;
+        unsigned CLK    :1;
+        unsigned KBD    :1;
+        unsigned HZ     :1;
+        unsigned USART  :1;
+        unsigned TMR    :1;
+    };
+    unsigned char value;
+} InterruptFlags;
+
+typedef union {
+    struct {
+        unsigned RESUME         :1;
+        unsigned BUS_RELEASE    :1;
+        unsigned THROW_INT      :1;
+        unsigned WAIT_ACK       :1;
+    };
+    unsigned char value;
+} InterruptResponse;
+
 typedef struct {
     unsigned char state;
     unsigned char port;
     unsigned char data;
     unsigned char intf;
-    unsigned char intcap;
+    //unsigned char intcap;
     void (*handler)();
 } ComputerParameters;
 
@@ -89,6 +112,8 @@ extern ComputerParameters computer_parameters;
 extern volatile unsigned char computer_char_buffer;
 extern unsigned char buffer[32];
 
+extern volatile InterruptFlags interrupt_flags;
+extern volatile InterruptResponse interrupt_response;
 
 #endif	/* COMPUTER_H */
 

@@ -44,6 +44,9 @@ ComputerParameters computer_parameters;
 volatile unsigned char computer_char_buffer;
 unsigned char buffer[32];
 
+volatile InterruptFlags interrupt_flags;
+volatile InterruptResponse interrupt_response;
+
 void computer_handler() {
     if (computer_parameters.state<STATE_TABLE_SIZE)
         (*state_function_pointer[computer_parameters.state])();
@@ -52,14 +55,14 @@ void computer_handler() {
 }
 
 void computer_read_handler() {
-    if (computer_parameters.port<READ_TABLE_SIZE)
+    if ((computer_parameters.port<READ_TABLE_SIZE)) // && (interrupt_response.WAIT_ACK == 0))
         computer_parameters.handler = read_function_pointer[computer_parameters.port];
     else
         computer_error();
 }
 
 void computer_write_handler() {
-    if (computer_parameters.port<WRITE_TABLE_SIZE)
+    if ((computer_parameters.port<WRITE_TABLE_SIZE)) // && (interrupt_response.WAIT_ACK == 0))
         computer_parameters.handler = write_function_pointer[computer_parameters.port];
     else
         computer_error();
@@ -95,10 +98,12 @@ void computer_clock_int_disable() {
 }
 
 void computer_error() {
-    usart_write_string("\r\nBlack Screen of Death !\r\nintf:");
+    usart_write_string("\r\nBlack Screen of Death !\r\nstatus:");
+    usart_write_hex(interrupt_flags.value);
+    usart_write_string(" intf:");
     usart_write_hex(computer_parameters.intf);
-    usart_write_string(" intcap:");
-    usart_write_hex(computer_parameters.intcap);
+    usart_write_string(" response:");
+    usart_write_hex(interrupt_response.value);
     usart_write_string(" state:");
     usart_write_hex(computer_parameters.state);
     usart_write_string(" port:");
@@ -150,7 +155,9 @@ void computer_sdcard_init() {
     memory_write_postlude();
 
     computer_memory_idle();
-    z80_bus_release();
+
+    interrupt_response.RESUME = 0;
+    interrupt_response.BUS_RELEASE = 1;
 }
 
 void computer_sdcard_read_sector() {
@@ -176,7 +183,9 @@ void computer_sdcard_read_sector() {
     memory_write_postlude();
 
     computer_memory_idle();
-    z80_bus_release();
+
+    interrupt_response.RESUME = 0;
+    interrupt_response.BUS_RELEASE = 1;
 }
 
 void computer_clock_set_datetime() {
@@ -206,7 +215,9 @@ void computer_clock_set_datetime() {
     SSPCONbits.SSPEN = 1;
 
     computer_memory_idle();
-    z80_bus_release();
+
+    interrupt_response.RESUME = 0;
+    interrupt_response.BUS_RELEASE = 1;
 }
 
 void computer_clock_get_datetime() {
@@ -236,7 +247,9 @@ void computer_clock_get_datetime() {
     memory_write_postlude();
 
     computer_memory_idle();
-    z80_bus_release();
+    
+    interrupt_response.RESUME = 0;
+    interrupt_response.BUS_RELEASE = 1;
 }
 
 void computer_flash_bios() {
@@ -269,5 +282,7 @@ void computer_flash_bios() {
     memory_read_postlude();
 
     computer_memory_idle();
-    z80_bus_release();
+
+    interrupt_response.RESUME = 0;
+    interrupt_response.BUS_RELEASE = 1;
 }

@@ -41,7 +41,7 @@ void front_panel_handler() {
         case FP_PROGRAM:
             if (mode == FP_RUN) {
                 intmask = ioexp_interrupt_read(IOEXP8_GPINTEN);
-                ioexp_interrupt_write(IOEXP8_GPINTEN, INTERRUPT_FRONT_PANEL);
+                ioexp_interrupt_write(IOEXP8_GPINTEN, INTERRUPT_FP);
                 mode = FP_PROGRAM;
                 z80_bus_request_from_wait_state();
                 computer_memory_active();
@@ -89,6 +89,7 @@ void front_panel_handler() {
             memory_select();
             break;
         case FP_RESET:
+
             z80_reset_assert();
             __delay_ms(1);
             z80_reset_disassert();
